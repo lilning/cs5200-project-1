@@ -19,5 +19,7 @@ https://github.com/lilning/cs5200-project-1/blob/main/project1_db.sql
 https://github.com/lilning/cs5200-project-1/blob/main/project1_testdata.sql
 ### SQL with query statements
 https://github.com/lilning/cs5200-project-1/blob/main/project1_queries.sql
+### Whole database
+https://github.com/lilning/cs5200-project-1/blob/main/P1.db
 
 
