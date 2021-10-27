@@ -12,7 +12,7 @@ https://github.com/lilning/cs5200-project-1/blob/main/Business%20Requirements.pd
 ### Logical data model in ERD
 ![Image of UML](https://github.com/lilning/cs5200-project-1/blob/main/Project1%20-%20ERD.png?raw=true)
 ### Relational schema
-![Image of UML](https://github.com/lilning/cs5200-project-1/blob/main/Relational%20Schema.pdf)
+https://github.com/lilning/cs5200-project-1/blob/main/Relational%20Schema.pdf
 ### SQL data definition statements
 https://github.com/lilning/cs5200-project-1/blob/main/project1_db.sql
 ### SQL with test data
