@@ -10,13 +10,13 @@ https://github.com/lilning/cs5200-project-1/blob/main/Business%20Requirements.pd
 ### Conceptual model in UML
 ![Image of UML](https://github.com/lilning/cs5200-project-1/blob/main/Project1%20-%20UML.png?raw=true)
 ### Logical data model in ERD
-![Image of UML](https://github.com/lilning/cs5200-project-1/blob/main/Project1%20-%20ERD.png?raw=true)
+![Image of ERD](https://github.com/lilning/cs5200-project-1/blob/main/Project1%20-%20ERD.png?raw=true)
 ### Relational schema
 https://github.com/lilning/cs5200-project-1/blob/main/Relational%20Schema.pdf
 ### SQL data definition statements
 https://github.com/lilning/cs5200-project-1/blob/main/project1_db.sql
 ### Showing the tables were created and conform to the constraints through screen shots
-
+![Image of screenshots](https://github.com/lilning/cs5200-project-1/blob/main/Project1%20-%20screenshots.png?raw=true)
 ### SQL with test data
 https://github.com/lilning/cs5200-project-1/blob/main/project1_testdata.sql
 ### SQL with query statements
