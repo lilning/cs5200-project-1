@@ -1,7 +1,7 @@
 # cs5200-project-1 
 <h1 align="center">Art Gallery Management System
   <br>
-  Author：Jiayi Ning & Yihong Wang
+  by Jiayi Ning & Yihong Wang
   <br>
 </h1>
 ## Table of Contents
