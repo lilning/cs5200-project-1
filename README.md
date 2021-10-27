@@ -15,6 +15,8 @@ https://github.com/lilning/cs5200-project-1/blob/main/Business%20Requirements.pd
 https://github.com/lilning/cs5200-project-1/blob/main/Relational%20Schema.pdf
 ### SQL data definition statements
 https://github.com/lilning/cs5200-project-1/blob/main/project1_db.sql
+### Showing the tables were created and conform to the constraints through screen shots
+
 ### SQL with test data
 https://github.com/lilning/cs5200-project-1/blob/main/project1_testdata.sql
 ### SQL with query statements
