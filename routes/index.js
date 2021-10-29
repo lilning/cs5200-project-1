@@ -1,7 +1,7 @@
 let express = require("express");
 let router = express.Router();
 
-const myDB = require("../db/sqliteDB.js");
+const myDB = require("../db/MySqliteDB.js");
 
 /* GET home page. */
 router.get("/", async function (req, res) {
@@ -9,10 +9,8 @@ router.get("/", async function (req, res) {
 
   const fires = await myDB.getFires();
 
-  console.log("got fires", fires);
-
   // render the _index_ template with the fires attrib as the list of fires
-  res.render("index", { fires: fires});
+  res.render("index", { fires: fires });
 });
 
 /* GET fire details. */
@@ -21,13 +19,25 @@ router.get("/fires/:fireID", async function (req, res) {
 
   const fireID = req.params.fireID;
 
-  console.log("gotfire details ", fireID);
-
   const fire = await myDB.getFireByID(fireID);
 
-  console.log("Fire created");
+  res.render("fireDetails", { fire: fire });
+});
 
-  res.render("fireDetails", {fire: fire});
+/* POST update artworks. */
+router.post("/fires/update", async function (req, res) {
+  console.log("Got artworks.");
+
+  //const fireID = req.params.fireID;
+  const fire2 = req.body;
+
+  console.log("gotfire details ", fire2);
+
+  await myDB.updateArtworks(fire2);
+
+  console.log("artworks update");
+
+  res.render("fireDetails", { fire: fire2 });
 });
 
 /* POST create fires. */
@@ -45,7 +55,7 @@ router.post("/fires/create", async function (req, res) {
   res.redirect("/");
 });
 
-/* POST create fires. */
+/* POST delete fires. */
 router.post("/fires/delete", async function (req, res) {
   console.log("Got post delete fire");
 
@@ -59,6 +69,5 @@ router.post("/fires/delete", async function (req, res) {
 
   res.redirect("/");
 });
-
 
 module.exports = router;
