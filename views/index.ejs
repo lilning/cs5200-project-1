@@ -58,15 +58,16 @@
 <h2>Artworks</h2>
 <div class="container">
    <div class="row">
-            <% fires.forEach(function (f) { %>
+            <% Arts.forEach(function (f) { %>
             <div class="col-md-6 col-sm-8">
             
               <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+
   <div class="card-body">
    <p class="card-text">
-    <a href="/fires/<%= f.artworkID %>"><%= f.name %></a></p>
-              <form action="/fires/delete" method="POST">
+    Artwork Name:
+    <a href="/Arts/<%= f.artworkID %>"><%= f.name %></a></p>
+              <form action="/Arts/delete" method="POST">
                 <input type="hidden" name="artworkID" value="<%= f.artworkID %>">
                 <button type="submit" class="btn btn-danger">Delete</button>
               </form>
@@ -86,7 +87,7 @@
         <div class="col-4">
           <h2>Add Artwork</h2>
 
-          <form action="/fires/create" method="POST">
+          <form action="/Arts/create" method="POST">
             <div>
               <label class="form-label"
                 >Name:

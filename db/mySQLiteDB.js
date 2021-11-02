@@ -10,7 +10,7 @@ async function connect() {
   });
 }
 
-async function getFires() {
+async function getArts() {
   const db = await connect();
 
   return await db.all("SELECT * FROM Artworks ORDER BY artworkID DESC LIMIT 6");
@@ -89,7 +89,7 @@ async function deleteFire(fireToDelete) {
 
   return await stmt.run();
 }
-module.exports.getFires = getFires;
+module.exports.getArts = getArts;
 module.exports.createFire = createFire;
 module.exports.deleteFire = deleteFire;
 module.exports.getFireByID = getFireByID;

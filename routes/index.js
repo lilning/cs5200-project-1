@@ -7,14 +7,14 @@ const myDB = require("../db/MySqliteDB.js");
 router.get("/", async function (req, res) {
   console.log("Got request for /");
 
-  const fires = await myDB.getFires();
+  const Arts = await myDB.getArts();
 
-  // render the _index_ template with the fires attrib as the list of fires
-  res.render("index", { fires: fires });
+  // render the _index_ template with the Arts attrib as the list of Arts
+  res.render("index", { Arts: Arts });
 });
 
 /* GET fire details. */
-router.get("/fires/:fireID", async function (req, res) {
+router.get("/Arts/:fireID", async function (req, res) {
   console.log("Got fire details");
 
   const fireID = req.params.fireID;
@@ -25,7 +25,7 @@ router.get("/fires/:fireID", async function (req, res) {
 });
 
 /* POST update artworks. */
-router.post("/fires/update", async function (req, res) {
+router.post("/Arts/update", async function (req, res) {
   console.log("Got artworks.");
 
   //const fireID = req.params.fireID;
@@ -40,9 +40,9 @@ router.post("/fires/update", async function (req, res) {
   res.render("fireDetails", { fire: fire2 });
 });
 
-/* POST create fires. */
-router.post("/fires/create", async function (req, res) {
-  console.log("Got post create/fires");
+/* POST create Arts. */
+router.post("/Arts/create", async function (req, res) {
+  console.log("Got post create/Arts");
 
   const fire = req.body;
 
@@ -55,8 +55,8 @@ router.post("/fires/create", async function (req, res) {
   res.redirect("/");
 });
 
-/* POST delete fires. */
-router.post("/fires/delete", async function (req, res) {
+/* POST delete Arts. */
+router.post("/Arts/delete", async function (req, res) {
   console.log("Got post delete fire");
 
   const fire = req.body;

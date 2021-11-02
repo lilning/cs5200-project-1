@@ -36,7 +36,7 @@ router.post("/artists/update", async function (req, res) {
   await myDB.updateArtist(updateInfo);
 
   console.log("artist update");
-  
+
   res.redirect("/artists");
 });
 
@@ -61,7 +61,7 @@ router.post("/createArtist", async function (req, res) {
   res.redirect("/artists");
 });
 
-/* POST delete fires. */
+/* POST delete Arts. */
 router.post("/artists/delete", async function (req, res) {
   console.log("Got post delete artist");
 
