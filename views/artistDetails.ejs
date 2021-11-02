@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/stylesheets/artist.css">
+
+
+        <title>ARTIST DETAILS</title>
+    </head>
+
+    <body>
+        <section class="container-fluid">
+            <%- include("nav"); -%>
+        </section>
+        <div class="container-fluid">
+            <h1>Artist Details</h1>
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto">
+                    <form id="updateArtist" action="/artists/update" method="POST" class="justify-content-center">
+                        <div class="form-group">
+                            <input
+                            name="artistID"
+                            type="hidden"
+                            class="form-control"
+                            value="<%= artist.artistID %>"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Artist Name:</label>
+                            <input
+                                required="true"
+                                name="Name"
+                                type="text"
+                                class="form-control"
+                                value="<%= artist.Name %>"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Birth Year:</label>
+                            <input
+                            required="false"
+                            name="birthYear"
+                            type="year"
+                            class="form-control"
+                            value="<%= artist.birthYear %>"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Death Year:</label>
+                            <input
+                            required="false"
+                            name="deathYear"
+                            type="year"
+                            class="form-control"
+                            value="<%= artist.deathYear %>"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nationality:</label>
+                            <input
+                            required="true"
+                            name="nationalityName"
+                            type="text"
+                            class="form-control"
+                            value="<%= artist.nationalityName %>"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description:</label>
+                                <textarea
+                                required="true"
+                                name="description"
+                                type="text"
+                                class="form-control"
+                                rows="10"
+                                ><%= artist.description %></textarea>
+                        </div>
+                        <button type="submit" class="btn">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <%- include("footer"); -%>
+    </body>
+</html>

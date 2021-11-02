@@ -1,0 +1,22 @@
+
+#mainNavbar {
+    font-size: 1.5rem;
+    font-weight: 100;
+    background-color: #4ecca3;
+  }
+  
+  #mainNavbar .nav-link {
+    color: #eeeeee;
+    padding-left:1rem;
+    padding-right:1rem;
+  }
+  
+  #mainNavbar .nav-link:hover {
+    color: #232931;
+  }
+  
+  #mainNavbar .navbar-brand {
+    color: #232931;
+    font-size: 1.8rem;
+    font-weight: bolder;
+  }
