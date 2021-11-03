@@ -10,10 +10,36 @@ async function connect() {
   });
 }
 
-async function getArts() {
+// async function getArts() {
+//   const db = await connect();
+
+//   return await db.all("SELECT * FROM Artworks ORDER BY artworkID DESC LIMIT 6");
+// }
+async function getArts(query) {
+  console.log("getCourses", query);
+  console.log("query", query);
+
+  // const db = await open({
+  //   filename: "./db/P1.db",
+  //   driver: sqlite3.Database,
+  // });
   const db = await connect();
 
-  return await db.all("SELECT * FROM Artworks ORDER BY artworkID DESC LIMIT 6");
+  const stmt = await db.prepare(`
+    SELECT * FROM Artworks
+    WHERE name LIKE @query OR year LIKE @query;
+    `);
+
+  const params = {
+    "@query": query + "%",
+  };
+
+  try {
+    return await stmt.all(params);
+  } finally {
+    await stmt.finalize();
+    db.close();
+  }
 }
 
 async function createFire(newFire) {

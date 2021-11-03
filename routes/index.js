@@ -3,14 +3,29 @@ let router = express.Router();
 
 const myDB = require("../db/MySqliteDB.js");
 
+// /* GET home page. */
+// router.get("/", async function (req, res) {
+//   console.log("Got request for /");
+
+//   const Arts = await myDB.getArts();
+
+//   // render the _index_ template with the Arts attrib as the list of Arts
+//   res.render("index", { Arts: Arts });
+// });
 /* GET home page. */
-router.get("/", async function (req, res) {
-  console.log("Got request for /");
-
-  const Arts = await myDB.getArts();
-
-  // render the _index_ template with the Arts attrib as the list of Arts
-  res.render("index", { Arts: Arts });
+router.get("/", async function (req, res, next) {
+  const query = req.query.q || "";
+  const msg = req.query.msg || null;
+  try {
+    const Arts = await myDB.getArts(query);
+    res.render("index", {
+      Arts,
+      query,
+      msg,
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 /* GET fire details. */
