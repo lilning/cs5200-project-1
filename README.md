@@ -24,4 +24,11 @@ https://github.com/lilning/cs5200-project-1/blob/main/Project%20Part%201/project
 ### Whole database
 https://github.com/lilning/cs5200-project-1/blob/main/Project%20Part%201/P1.db
 
+## Division of Tasks
+[Yihong](https://github.com/yihongwang001) created the CRUD and Search operations for the Artworks page.<br>
+[Jiayi](https://github.com/lilning) created the CRUD and Search operations for the Artists page.
 
+## Instructions for Execution
+1. Clone the repository
+2. <code>npm install</code>
+3. <code>npm start</code>
