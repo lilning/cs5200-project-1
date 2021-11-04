@@ -23,6 +23,7 @@
   </head>
 
   <body>
+    <!-- Nav Bar -->
     <section class="container-fluid">
     <%- include("nav"); -%>
     </section>
@@ -31,9 +32,31 @@
       <h1>Artist Management</h1>
       </div>
       <div class="col-4">
-      <a href="/createArtist" class="btn">Add New Artist</a>
+        <a href="/createArtist" class="btn">Add New Artist</a>
       </div>
     </section>
+
+    <!-- Search Bar -->
+    <section>
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <form action="/artists">
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="text"
+                name="q"
+                placeholder=""
+                value="<%= query %>"
+              />
+              <button type="submit" class="btn-success btn">Search by Artist Name</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artist Table -->
     <div class="container-fluid">
       <main class="row justify-content-center">
         <div class="col-10">

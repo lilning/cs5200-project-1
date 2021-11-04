@@ -10,50 +10,73 @@ async function connect() {
   });
 }
 
-// List out all artist records
-async function getArtists() {
-  try {
-    const db = await connect();
-    let sql_query = "SELECT Artists.artistID, Artists.Name, Artists.birthYear, Artists.deathYear, Nationality.name AS nationalityName, Nationality.region FROM Artists, Nationality Where Artists.nationalityID = Nationality.nationalityID ORDER BY Artists.Name"
-  
-    return await db.all(sql_query);
-  } catch (e) {
-    return console.error(e.message);
-  }
-}
-
-
 // Create an artist record
 async function createArtist(newArtist) {
+  let db, stmt, stmt1;
   try {
-    const db = await connect();
+    db = await connect();
 
-    const stmt = await db.prepare(`INSERT INTO
+    if (newArtist.nationality == 'other') {
+      try {
+        stmt1 = await db.prepare(`INSERT INTO
+        Nationality(name, region)
+        VALUES (:newNationality, :newRegion)`);
+        console.log("Add new nationality", newArtist.newNationality);
+        stmt1.bind({
+          ":newNationality": newArtist.newNationality,
+          ":newRegion": newArtist.newRegion,
+        });
+        return await stmt1.run();
+      } finally {
+        await stmt1.finalize();
+        stmt = await db.prepare(`INSERT INTO
+          Artists(Name, birthYear, deathYear, nationalityID, description)
+          VALUES (:Name, :birthYear, :deathYear, (SELECT nationalityID FROM Nationality WHERE name=:newNationality), :description)
+          `);
+          console.log("got create artist with new nationality", newArtist.Name);
+        stmt.bind({
+          ":Name": newArtist.Name,
+          ":birthYear": newArtist.birthYear,
+          ":deathYear": newArtist.deathYear,
+          ":newNationality": newArtist.newNationality,
+          ":description": newArtist.description,
+        });
+        return await stmt.run();
+      }
+    } else {
+
+      stmt = await db.prepare(
+      `INSERT INTO
       Artists(Name, birthYear, deathYear, nationalityID, description)
       VALUES (:Name, :birthYear, :deathYear, (SELECT nationalityID FROM Nationality WHERE name=:nationalityName), :description)
-    `);
-    console.log("got create artist", newArtist.Name);
+      `)
+  
+      console.log("got create artist with existing nationality", newArtist.Name);
 
-    stmt.bind({
-      ":Name": newArtist.Name,
-      ":birthYear": newArtist.birthYear,
-      ":deathYear": newArtist.deathYear,
-      ":nationalityName": newArtist.nationalityName,
-      ":description": newArtist.description,
-    });
-
-    return await stmt.run();
+      stmt.bind({
+        ":Name": newArtist.Name,
+        ":birthYear": newArtist.birthYear,
+        ":deathYear": newArtist.deathYear,
+        ":nationalityName": newArtist.nationality,
+        ":description": newArtist.description,
+      });
+      return await stmt.run();
+    }
   } catch(e) {
-    return console.error(e.message);
+    console.error(e.message);
+  } finally {
+    await stmt.finalize();
+    await db.close();
   }
 }
 
 // Update an artist record
 async function updateArtist(newArtist) {
+  let db, stmt;  
   try {
-    const db = await connect();
+    db = await connect();
 
-    const stmt = await db.prepare(`UPDATE Artists
+    stmt = await db.prepare(`UPDATE Artists
       SET Name = :Name, birthYear = :birthYear, deathYear = :deathYear, nationalityID = (SELECT nationalityID FROM Nationality WHERE Nationality.name LIKE :nationalityName), description = :description
       WHERE artistID = :artistID;
     `);
@@ -71,35 +94,43 @@ async function updateArtist(newArtist) {
     console.log("got bind", newArtist.Name);
 
     return await stmt.run();
-  } catch (e) {
-    return console.error(e.message);
+  } catch(e) {
+    console.error(e.message);
+  } finally {
+    await stmt.finalize();
+    await db.close();
   }
 }
 
 // Get Artist Record by ID
 async function getArtistByID(artistID) {
+  let db, stmt;
   try {
-    const db = await connect();
+    db = await connect();
 
     let sql_query = `SELECT Artists.artistID, Artists.Name, Artists.birthYear, Artists.deathYear, Nationality.name AS nationalityName, Nationality.region, Artists.description FROM Artists, Nationality Where Artists.artistID = :artistID and Artists.nationalityID = Nationality.nationalityID`
-    const stmt = await db.prepare(sql_query);
+    stmt = await db.prepare(sql_query);
 
     stmt.bind({
       ":artistID": artistID,
     });
 
     return await stmt.get();
-  } catch (e) {
-    return console.error(e.message);
+  } catch(e) {
+    console.error(e.message);
+  } finally {
+    await stmt.finalize();
+    await db.close();
   }
 }
 
 // Delete Artist Record
 async function deleteArtist(artistToDelete) {
+  let db, stmt;
   try {
-    const db = await connect();
+    db = await connect();
 
-    const stmt = await db.prepare(`DELETE FROM
+    stmt = await db.prepare(`DELETE FROM
       Artists
       WHERE artistID = :IDToDelete
     `);
@@ -109,8 +140,43 @@ async function deleteArtist(artistToDelete) {
     });
 
     return await stmt.run();
-  } catch (e) {
-    return console.error(e.message);
+  } catch(e) {
+    console.error(e.message);
+  } finally {
+    await stmt.finalize();
+    await db.close();
+  }
+}
+
+// List out all artist records with or without query
+async function getArtists(query) {
+  let db, stmt;
+  try {
+    console.log("got searchArtist", query);
+    db = await connect();
+
+    let sql_query = `SELECT Artists.artistID, Artists.Name, Artists.birthYear, Artists.deathYear, Nationality.name AS nationalityName, Nationality.region FROM Artists, Nationality Where Artists.nationalityID = Nationality.nationalityID AND Artists.Name LIKE :query ORDER BY Artists.Name`;
+    stmt = await db.prepare(sql_query);
+
+    stmt.bind({
+      ":query": "%"+query+"%",
+    });
+
+    return await stmt.all();
+  } finally {
+    await stmt.finalize();
+    await db.close();
+  }
+}
+
+// List out all nationality records
+async function getNationality() {
+  let db;
+  try {
+    db = await connect();
+    return await db.all("SELECT name, region FROM Nationality");
+  } finally {
+    await db.close();
   }
 }
 
@@ -119,3 +185,4 @@ module.exports.createArtist = createArtist;
 module.exports.deleteArtist = deleteArtist;
 module.exports.getArtistByID = getArtistByID;
 module.exports.updateArtist = updateArtist;
+module.exports.getNationality = getNationality;

@@ -57,14 +57,29 @@
                             />
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Nationality:</label>
-                            <input
-                            required="true"
-                            name="nationalityName"
-                            type="text"
-                            class="form-control"
-                            />
+                            <label for="nationality">Nationality:</label>
+                            <select class="form-control" id="nationality" name="nationality">
+                                <% for (const n in nat) { %>
+                                  <option value="<%= nat[n].name %>"><%= nat[n].name %></option>
+                                <% } %>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
+                          
+                        <div class="form-group" id="nationalityOther">
+                            <div><p>If Nationality is Other, please enter new nationality value and its region (e.g. Europe).</p></div>
+                            <div>
+                                <label for="newNationality">Nationality:</label>
+                                <input type="text" class="form-control" id = "newNationality"
+                                name="newNationality">
+                            </div>
+                            <div>
+                                <label for="newRegion">Region:</label>
+                                <input type="text" class="form-control" id = "newRegion"
+                                name="newRegion">
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="form-label">Description:</label>
                                 <textarea
@@ -81,5 +96,23 @@
             </div>
         </div>
         <%- include("footer"); -%>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+        <script>$("#nationality").change(function() {
+            if ($(this).val() == "other") {
+              $('#nationalityOther').show();
+              $('#newNationality').attr('required', '');
+              $('#newNationality').attr('data-error', 'This field is required.');
+              $('#newRegion').attr('required', '');
+              $('#newRegion').attr('data-error', 'This field is required.');
+            } else {
+              $('#nationalityOther').hide();
+              $('#newNationality').removeAttr('required');
+              $('#newNationality').removeAttr('data-error');
+              $('#newRegion').removeAttr('required');
+              $('#newRegion').removeAttr('data-error');
+            }
+        });
+        $("#nationality").trigger("change");</script>
     </body>
 </html>

@@ -68,14 +68,15 @@
                             />
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Nationality:</label>
-                            <input
-                            required="true"
-                            name="nationalityName"
-                            type="text"
-                            class="form-control"
-                            value="<%= artist.nationalityName %>"
-                            />
+                            <label for="nationalityName">Nationality:</label>
+                            <select class="form-control" id="nationalityName" name="nationalityName">
+                                <option value="<%= artist.nationalityName %>" selected><%= artist.nationalityName %></option>
+                                <% for (const n in nat) { %>
+                                    <% if (nat[n].name != artist.nationalityName) { %>
+                                        <option value="<%= nat[n].name %>"><%= nat[n].name %></option>
+                                    <% } %>
+                                <% } %>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Description:</label>
