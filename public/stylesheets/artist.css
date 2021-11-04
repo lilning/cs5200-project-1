@@ -31,17 +31,9 @@ h2 {
 
 .btn {
     background-color: #4ecca3;
-    font-weight: 100;
-    font-size: 1rem;
     color: #eeeeee;
-    padding: 15px 32px;
 }
 
-.d-flex {
-    font-weight: 100;
-    font-size: 1rem;
-    padding: 15px 32px;
-}
 
 .btn:hover {
     background-color: #eeeeee;
