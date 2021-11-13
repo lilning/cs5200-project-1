@@ -8,7 +8,7 @@
 ### Description of the requirements of the problem and list of business rules and possible nouns and actions
 https://github.com/lilning/cs5200-project-1/blob/main/Project%20Part%201/Business%20Requirements.pdf
 ### Conceptual model in UML
-![Image of UML](https://github.com/lilning/cs5200-project-1/blob/main/Project%20Part%201/Project1%20-%20ERD.png?raw=true)
+![Image of UML](https://github.com/lilning/cs5200-project-1/blob/main/Project%20Part%201/Project1%20-%20UML2.png?raw=true)
 ### Logical data model in ERD
 ![Image of ERD](https://github.com/lilning/cs5200-project-1/blob/main/Project%20Part%201/Project1%20-%20ERD.png?raw=true)
 ### Relational schema
